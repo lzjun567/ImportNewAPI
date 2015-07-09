@@ -1,0 +1,2 @@
+# run like $ pip install -r requirements/dev.txt
+-r base.txt
