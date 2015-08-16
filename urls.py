@@ -7,6 +7,8 @@ from handlers import *
 
 url_patterns = [
     (r"/items", ItemListHandler),
-    (r"/items/(\d+)", ItemDetailHandler)
+    (r"/items/(\d+)", ItemDetailHandler),
+    (r"/items/(?P<category>[a-z0-9]+)", ItemCategoryListHandler),
+
 
 ]

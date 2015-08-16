@@ -5,3 +5,4 @@ _author__ = 'liuzhijun'
 
 from item_service import ItemListHandler
 from item_service import ItemDetailHandler
+from item_service import ItemCategoryListHandler

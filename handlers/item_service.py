@@ -6,7 +6,7 @@ __author__ = 'liuzhijun'
 import tornado
 
 from base import BaseHandler
-from models import Post
+from models import JavaPost, PythonPost, Post
 
 
 class ItemListHandler(BaseHandler):
@@ -30,3 +30,20 @@ class ItemDetailHandler(BaseHandler):
     def get(self, item_id):
         post = Post.find_one(item_id)
         self.write({"post": post})
+
+
+class ItemCategoryListHandler(BaseHandler):
+    @tornado.gen.coroutine
+    def get(self, category):
+        try:
+            first_id = int(self.get_argument("f_id", None))
+        except TypeError:
+            first_id = None
+        last_id = int(self.get_argument("l", 0))
+        count = int(self.get_argument("c", 20))
+        model = PythonPost if category == 'python' else JavaPost
+        if first_id is not None:
+            items = model.find_many_by_time_over_id(first_id, 0, count)
+        else:
+            items = model.find_many(start=last_id, num=count)
+        self.write({"posts": items, 'l': last_id + len(items)})
