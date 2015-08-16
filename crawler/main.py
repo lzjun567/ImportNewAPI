@@ -54,6 +54,7 @@ def main(category, page_count):
         while True:
             raw_post = yield detail_info_queue.get()
             post = yield crawl_detail_info(raw_post)
+            print category
             obj = JavaPost(**post) if category == 'java' else PythonPost(**post)
             obj.save()
             detail_info_queue.task_done()
@@ -70,8 +71,9 @@ def main(category, page_count):
     print('Done in %d seconds' % (time.time() - start))
 
 
+
 if __name__ == '__main__':
     logging.basicConfig()
     io_loop = ioloop.IOLoop.current()
-    category, page_count = 'python', 1
-    io_loop.run_sync(lambda: main(category, page_count))
+    io_loop.run_sync(lambda: main('python', 1))
+    io_loop.run_sync(lambda: main("java", 1))
