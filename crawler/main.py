@@ -54,7 +54,6 @@ def main(category, page_count):
         while True:
             raw_post = yield detail_info_queue.get()
             post = yield crawl_detail_info(raw_post)
-            print category
             obj = JavaPost(**post) if category == 'java' else PythonPost(**post)
             obj.save()
             detail_info_queue.task_done()
