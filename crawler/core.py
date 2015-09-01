@@ -29,7 +29,7 @@ def crawl_base_info(url):
             cover = post_thumb.a.img['src'] if post_thumb else ""
             meta = archive.find("div", class_="post-meta")
             url = meta.p.a['href']
-            title = meta.find(class_="meta-title").string
+            title = meta.find(class_="archive-title").string
             description = meta.find('span', class_="excerpt").p.string or ""
             try:
                 create_at = meta.p.contents[2].replace("|", '').strip()
