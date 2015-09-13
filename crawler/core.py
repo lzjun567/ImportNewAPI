@@ -10,6 +10,7 @@ import traceback
 from bs4 import BeautifulSoup, Comment
 from tornado import gen
 from tornado import httpclient
+from tornado.httpclient import HTTPError
 
 
 @gen.coroutine
